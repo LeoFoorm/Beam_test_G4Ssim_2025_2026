@@ -41,14 +41,14 @@ G4bool SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
     EventAction* eventAction = const_cast<EventAction*>(constEventAction); 
   
         
-   if (copynum >= 0 && copynum < 20) {
+   /*if (copynum >= 0 && copynum < 10) {
         eventAction->Add_DetectedPhotons_event_A_SiPMs(copynum);
-    } else if (copynum >= 20 && copynum < 40) {
-        eventAction->Add_DetectedPhotons_event_B_SiPMs(copynum - 20); 
-    }
+    } else if (copynum >= 10 && copynum < 20) {
+        eventAction->Add_DetectedPhotons_event_B_SiPMs(copynum - 10); 
+    }*/
 
 
-    man->FillNtupleIColumn(0,0,evt); 
+    man->FillNtupleIColumn(0, 59, evt); 
     man->AddNtupleRow(0); 
     
      G4String particleName = track->GetDefinition()->GetParticleName();  // Get the particle type

@@ -30,9 +30,9 @@ public:
 
 //--------------------- JUST MUONS/PIONS --------------------------------
 
-void Add_DetectedPhotons_event_A_SiPMs (G4int sipmID_a)
+/*void Add_DetectedPhotons_event_A_SiPMs (G4int sipmID_a)
 {
-    if (sipmID_a >= 0 && sipmID_a < 20 )
+    if (sipmID_a >= 0 && sipmID_a < 10 )
     {
         photonHits_event_A[sipmID_a]++;
     }
@@ -42,18 +42,18 @@ std::vector<G4int> GetPhotonHits_A() const{return photonHits_event_A;}
 
 void Add_DetectedPhotons_event_B_SiPMs (G4int sipmID_b)
 {
-    if (sipmID_b >= 0 && sipmID_b < 20 )
+    if (sipmID_b >= 0 && sipmID_b < 10 )
     {
         photonHits_event_B[sipmID_b]++;
     }
 }
-std::vector<G4int> GetPhotonHits_B() const{return photonHits_event_B;}
+std::vector<G4int> GetPhotonHits_B() const{return photonHits_event_B;}*/
 
 
 
 //--------------------- JUST SECONDARIES --------------------------------
 
-void Add_DetectedPhotons_event_A_SiPMs_s (G4int sipmID_a_s)
+/*void Add_DetectedPhotons_event_A_SiPMs_s (G4int sipmID_a_s)
 {
     if (sipmID_a_s >= 0 && sipmID_a_s < 20 )
     {
@@ -70,14 +70,14 @@ void Add_DetectedPhotons_event_B_SiPMs_s (G4int sipmID_b_s)
         photonHits_event_B_s[sipmID_b_s]++;
     }
 }
-std::vector<G4int> GetPhotonHits_B_s() const{return photonHits_event_B_s;}
+std::vector<G4int> GetPhotonHits_B_s() const{return photonHits_event_B_s;}*/
 
 
-//**************************************************************************************    //<--- NEW
-G4int GetTotalDetectedPhotons_Others() const { return TOTAL_Detected_photons_others; }
-G4int GetDetectedPhotons_Others_A() const { return photons_detected_others_A; }
-G4int GetDetectedPhotons_Others_B() const { return photons_detected_others_B; }
-//**************************************************************************************    //<--- NEW
+//**************************************************************************************    
+//G4int GetTotalDetectedPhotons_Others() const { return TOTAL_Detected_photons_others; }
+//G4int GetDetectedPhotons_Others_A() const { return photons_detected_others_A; }
+//G4int GetDetectedPhotons_Others_B() const { return photons_detected_others_B; }
+//**************************************************************************************   
 
 //---------------------------------------------------------
 //void AddLocalTime(G4int sipmID, G4double ltime) 
@@ -117,13 +117,13 @@ std::vector<G4double> GetEdepB() const { return fEdepB; }
 
 
 //-----------------------------------------------------------
-void AddEdepAbs(G4double edep_abs){fEdep_abs += edep_abs;}
+//void AddEdepAbs(G4double edep_abs){fEdep_abs += edep_abs;}
 //-----------------------------------------------------------
 
 
 //---------- JUST SECONDARIES ---------------
 
-void AddEdepA_s(G4int E_A_s, G4double edep_A_s)
+/*void AddEdepA_s(G4int E_A_s, G4double edep_A_s)
 { 
     if (E_A_s >= 0 && E_A_s < fEdepA_s.size()) 
     {
@@ -170,7 +170,7 @@ std::vector<G4double> GetdEdx_B() const { return fTotaldEdx_B; }
 
 
 
-//void AdddEdx_abs(G4double dedx_abs){fdEdx_abs += dedx_abs;}
+//void AdddEdx_abs(G4double dedx_abs){fdEdx_abs += dedx_abs;}*/
 
 
 
@@ -202,7 +202,7 @@ void AddPhotonG_UsingEdep_B(G4int PhotonGen_b, G4double generated_photons_B)
 
 
  //------------------- JUST SECONDARIES -----------------------------------------------------
-void AddPhotonG_UsingEdep_A_s(G4int PhotonGen_a_s, G4int generated_photons_A_s) 
+/*void AddPhotonG_UsingEdep_A_s(G4int PhotonGen_a_s, G4int generated_photons_A_s) 
 {
    if (PhotonGen_a_s >= 0 && PhotonGen_a_s < fGenerated_photons_A_s.size())
    {
@@ -219,7 +219,7 @@ void AddPhotonG_UsingEdep_B_s(G4int PhotonGen_b_s, G4int generated_photons_B_s)
        fGenerated_photons_B_s[PhotonGen_b_s] += generated_photons_B_s;
    }
 }
-std::vector<G4int> GetPhotonCount_Edep_B_s() const { return fGenerated_photons_B_s; }
+std::vector<G4int> GetPhotonCount_Edep_B_s() const { return fGenerated_photons_B_s; }*/
 
 
 
@@ -248,7 +248,7 @@ std::vector<G4int> GetTraversedBars_B() const {return traversed_Bars_B;}
 
 
 //-------------- JUST SECONDARIES --------------------------------------------------------------------------------------------- 
-void AddTraversedBar_A_s (G4int barA_s){
+/*void AddTraversedBar_A_s (G4int barA_s){
 
     if (std::find(traversed_Bars_A_s.begin(), traversed_Bars_A_s.end(), barA_s) == traversed_Bars_A_s.end()) {  
       traversed_Bars_A_s.push_back(barA_s);
@@ -263,7 +263,7 @@ void AddTraversedBar_B_s (G4int barB_s){
        traversed_Bars_B_s.push_back(barB_s);
     }
 }
-std::vector<G4int> GetTraversedBars_B_s() const {return traversed_Bars_B_s;}
+std::vector<G4int> GetTraversedBars_B_s() const {return traversed_Bars_B_s;}*/
 
 
 
@@ -276,7 +276,7 @@ void Particle_Name_Pierced_Layer_A(G4String name_a, G4int trackID){
     
 if (particle_name_tracks_A.find(trackID) == particle_name_tracks_A.end()) {
     particles_names_A.push_back(name_a);
-   particle_name_tracks_A.insert(trackID); // Marcar como registrada
+   particle_name_tracks_A.insert(trackID); 
 }
 }
 
@@ -296,7 +296,7 @@ vector<G4String> Get_particle_names_B() const {return particles_names_B;}
 
 
 //--------------- JUST SECONDARIES ------------------------
-void Particle_Name_Pierced_Layer_A_s(G4String name_a_s, G4int trackID){     //<---- NEW (until line 313)
+/*void Particle_Name_Pierced_Layer_A_s(G4String name_a_s, G4int trackID){    
     if (particle_name_tracks_A_s.find(trackID) == particle_name_tracks_A_s.end()) {
     particles_names_A_s.push_back(name_a_s);
     particle_name_tracks_A_s.insert(trackID); 
@@ -314,7 +314,7 @@ void Particle_Name_Pierced_Layer_B_s(G4String name_b_s, G4int trackID){
 }
 }
 
-vector<G4String> Get_particle_names_B_s() const {return particles_names_B_s;}
+vector<G4String> Get_particle_names_B_s() const {return particles_names_B_s;}*/
 
 
 
@@ -338,22 +338,6 @@ vector<G4double> Get_pos_y_a() const {return pos_layer_A_y;}
 vector<G4double> Get_pos_z_a() const {return pos_layer_A_z;}
 
 
-/*void Add_Positions_Layer_A_y(G4double pos_ya,, G4int trackID_pos){
-    if (particle_tracks_A.find(trackID_pos) == particle_tracks_A.end()) {
-    pos_layer_A_y.push_back(pos_ya);
-    particle_tracks_A.insert(trackID_pos);
-    }
-}
-vector<G4double> Get_pos_y_a() const {return pos_layer_A_y;}
-
-
-void Add_Positions_Layer_A_z(G4double pos_za, G4int trackID_pos){
-    if (particle_tracks_A.find(trackID_pos) == particle_tracks_A.end()){ 
-    pos_layer_A_z.push_back(pos_za);
-    particle_tracks_A.insert(trackID_pos);
-    }
-}
-vector<G4double> Get_pos_z_a() const {return pos_layer_A_z;}*/
 
 
 
@@ -371,22 +355,7 @@ vector<G4double> Get_pos_y_b() const {return pos_layer_B_y;}
 vector<G4double> Get_pos_z_b() const {return pos_layer_B_z;}
 
 
-/*void Add_Positions_Layer_B_y(G4double pos_yb, G4int trackID_pos){
-    if (particle_tracks_B.find(trackID_pos) == particle_tracks_B.end()){ 
-    pos_layer_B_y.push_back(pos_yb);
-    particle_tracks_B.insert(trackID_pos);
-    }
-}
-vector<G4double> Get_pos_y_b() const {return pos_layer_B_y;}
 
-
-void Add_Positions_Layer_B_z(G4double pos_zb, G4int trackID_pos){
-    if (particle_tracks_B.find(trackID_pos) == particle_tracks_B.end()){ 
-    pos_layer_B_z.push_back(pos_zb);
-    particle_tracks_B.insert(trackID_pos);
-    }
-}
-vector<G4double> Get_pos_z_b() const {return pos_layer_B_z;}*/
 
 
 
@@ -395,7 +364,7 @@ vector<G4double> Get_pos_z_b() const {return pos_layer_B_z;}*/
 
 //-------------------- JUST SECONDARIES ---------------------------
 //-------------------- LAYER A --------------------------
-void Add_Positions_Layer_A_s(G4double pos_xa_s, G4double pos_ya_s, G4double pos_za_s, G4int trackID_pos){
+/*void Add_Positions_Layer_A_s(G4double pos_xa_s, G4double pos_ya_s, G4double pos_za_s, G4int trackID_pos){
     if (particle_tracks_A_s.find(trackID_pos) == particle_tracks_A_s.end()){ 
     pos_layer_A_x_s.push_back(pos_xa_s);
     pos_layer_A_y_s.push_back(pos_ya_s);
@@ -406,25 +375,6 @@ void Add_Positions_Layer_A_s(G4double pos_xa_s, G4double pos_ya_s, G4double pos_
 vector<G4double> Get_pos_x_a_s() const {return pos_layer_A_x_s;}
 vector<G4double> Get_pos_y_a_s() const {return pos_layer_A_y_s;}
 vector<G4double> Get_pos_z_a_s() const {return pos_layer_A_z_s;}
-
-
-/*void Add_Positions_Layer_A_y_s(G4double pos_ya_s, G4int trackID_pos){
-    if (particle_tracks_A_s.find(trackID_pos) == particle_tracks_A_s.end()){ 
-    pos_layer_A_y_s.push_back(pos_ya_s);
-    particle_tracks_A_s.insert(trackID_pos);
-}
-}
-vector<G4double> Get_pos_y_a_s() const {return pos_layer_A_y_s;}
-
-
-void Add_Positions_Layer_A_z_s(G4double pos_za_s, G4int trackID_pos){
-    if (particle_tracks_A_s.find(trackID_pos) == particle_tracks_A_s.end()){ 
-    pos_layer_A_z_s.push_back(pos_za_s);
-    particle_tracks_A_s.insert(trackID_pos);
-}
-}
-vector<G4double> Get_pos_z_a_s() const {return pos_layer_A_z_s;}*/
-
 
 
 
@@ -440,26 +390,9 @@ void Add_Positions_Layer_B_s(G4double pos_xb_s, G4double pos_yb_s, G4double pos_
 }
 vector<G4double> Get_pos_x_b_s() const {return pos_layer_B_x_s;}
 vector<G4double> Get_pos_y_b_s() const {return pos_layer_B_y_s;}
-vector<G4double> Get_pos_z_b_s() const {return pos_layer_B_z_s;}
-
-
-/*void Add_Positions_Layer_B_y_s(G4double pos_yb_s, G4int trackID_pos){
-    if (particle_tracks_B_s.find(trackID_pos) == particle_tracks_B_s.end()){
-    pos_layer_B_y_s.push_back(pos_yb_s);
-    particle_tracks_B_s.insert(trackID_pos);
-}
-    
-}
-vector<G4double> Get_pos_y_b_s() const {return pos_layer_B_y_s;}
-
-
-void Add_Positions_Layer_B_z_s(G4double pos_zb_s, G4int trackID_pos){
-    if (particle_tracks_B_s.find(trackID_pos) == particle_tracks_B_s.end()){
-    pos_layer_B_z_s.push_back(pos_zb_s);
-    particle_tracks_B_s.insert(trackID_pos);
-}
-}
 vector<G4double> Get_pos_z_b_s() const {return pos_layer_B_z_s;}*/
+
+
 
 
 //---------------------------------------------------------

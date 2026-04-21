@@ -189,6 +189,8 @@ std::vector<G4double> energy_test = {
         std::cout << "Material: " << steel->GetName() << std::endl;
         std::cout << "Densidad: " << density/ (kg/m3)  << " kg/m^3" << std::endl;
 
+ 
+
 
  worldMaterial->SetMaterialPropertiesTable(propworld);
  plastic->SetMaterialPropertiesTable(prop);

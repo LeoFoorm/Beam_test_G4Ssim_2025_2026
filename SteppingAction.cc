@@ -47,7 +47,7 @@ if(particle->GetParticleName()== "mu+" ||  particle->GetParticleName() == "pi+" 
    G4double generated_photons_B ;
 
 
-   if(barvolume == scoringVolume_Absorber){
+   /*if(barvolume == scoringVolume_Absorber){
       
 	   G4double edep_abs ;
 	   G4double dEdx_abs ;
@@ -57,12 +57,16 @@ if(particle->GetParticleName()== "mu+" ||  particle->GetParticleName() == "pi+" 
 		fEventAction->AddEdepAbs(edep_abs);
 	   }
       
-   }
+   }*/
    
+
+ 
+
+
 if (std::find(scoringVolumesA.begin(), scoringVolumesA.end(), barvolume) != scoringVolumesA.end())
         {
 
-         G4int copyNumA = touchedbar->GetCopyNumber(); // Número de copia de la barra
+         G4int copyNumA = touchedbar->GetCopyNumber(); 
          fEventAction->AddTraversedBar_A(copyNumA);
     
 
@@ -71,26 +75,24 @@ if (std::find(scoringVolumesA.begin(), scoringVolumesA.end(), barvolume) != scor
         G4double A_pos_x = position_A.x()/(cm);
         G4double A_pos_y = position_A.y()/(cm);
         G4double A_pos_z = position_A.z()/(cm);
-        G4int trackID_pos = step->GetTrack()->GetTrackID();       //<--- NEW
+        G4int trackID_pos = step->GetTrack()->GetTrackID();       
          
         fEventAction->Add_Positions_Layer_A(A_pos_x, A_pos_y, A_pos_z, trackID_pos);
-        /*fEventAction->Add_Positions_Layer_A_x(A_pos_x, trackID_pos);
-        fEventAction->Add_Positions_Layer_A_y(A_pos_y, trackID_pos);
-        fEventAction->Add_Positions_Layer_A_z(A_pos_z, trackID_pos);*/
+
       
 
          G4double edep_A = step->GetTotalEnergyDeposit();
 
-          G4double stepLength_New = step->GetStepLength(); //will be useful?
+          G4double stepLength_New = step->GetStepLength(); 
          
          if (edep_A > 0.&& stepLength > 0.)
          {
 
             G4String p_name = step->GetTrack()->GetDefinition()->GetParticleName();
-            G4int trackID = step->GetTrack()->GetTrackID();       //<--- NEW
+            G4int trackID = step->GetTrack()->GetTrackID();     
             fEventAction->Particle_Name_Pierced_Layer_A(p_name, trackID);
 
-            dEdxStep_A = edep_A / stepLength ;
+            //dEdxStep_A = edep_A / stepLength ;
 
             G4Material *plastic_scin = step->GetPreStepPoint()->GetMaterial(); 
             G4MaterialPropertiesTable *Yield = plastic_scin->GetMaterialPropertiesTable(); 
@@ -99,12 +101,16 @@ if (std::find(scoringVolumesA.begin(), scoringVolumesA.end(), barvolume) != scor
             generated_photons_A = edep_A * Scintillation_Yield; 
             generated_photons_A = G4Poisson(generated_photons_A); 
 
+            //std::ofstream outFile1("/Users/leonardofernandezluna/Documents/SIMULATIONS_GEANT4/(2)_SIM_ARTICLE/BUILD/DATA_RESULTS/Test.dat",std::ios::app);
+
             size_t a = std::distance(scoringVolumesA.begin(),
                                               std::find(scoringVolumesA.begin(), scoringVolumesA.end(), barvolume));
             
             fEventAction->AddPhotonG_UsingEdep_A(a, generated_photons_A);
             fEventAction->AddEdepA(a, edep_A);
-            fEventAction->AccumulatedEdx_A(a, dEdxStep_A);    
+           // fEventAction->AccumulatedEdx_A(a, dEdxStep_A);  
+           
+           
          }}
       
 
@@ -112,7 +118,7 @@ if (std::find(scoringVolumesA.begin(), scoringVolumesA.end(), barvolume) != scor
         {
 
            
-            G4int copyNumB = touchedbar->GetCopyNumber(); // Número de copia de la barra
+            G4int copyNumB = touchedbar->GetCopyNumber(); 
             fEventAction->AddTraversedBar_B(copyNumB);
             
             G4ThreeVector position_B = step->GetPostStepPoint()->GetPosition();
@@ -123,9 +129,6 @@ if (std::find(scoringVolumesA.begin(), scoringVolumesA.end(), barvolume) != scor
             G4int trackID_pos = step->GetTrack()->GetTrackID(); 
         
             fEventAction->Add_Positions_Layer_B(B_pos_x, B_pos_y, B_pos_z, trackID_pos);
-            /*fEventAction->Add_Positions_Layer_B_x(B_pos_x, trackID_pos);
-            fEventAction->Add_Positions_Layer_B_y(B_pos_y, trackID_pos);
-            fEventAction->Add_Positions_Layer_B_z(B_pos_z, trackID_pos);*/
 
 
             G4double edep_B = step->GetTotalEnergyDeposit();
@@ -135,9 +138,9 @@ if (std::find(scoringVolumesA.begin(), scoringVolumesA.end(), barvolume) != scor
 
             G4String p_name = step->GetTrack()->GetDefinition()->GetParticleName();
             G4int trackID = step->GetTrack()->GetTrackID();         //<--- NEW
-            fEventAction->Particle_Name_Pierced_Layer_B(p_name, trackID);   //<--- NEW
+            fEventAction->Particle_Name_Pierced_Layer_B(p_name, trackID);  
 
-             dEdxStep_B = edep_B  / stepLength ;
+             //dEdxStep_B = edep_B  / stepLength ;
 
             G4Material *plastic_scin = step->GetPreStepPoint()->GetMaterial(); 
             G4MaterialPropertiesTable *Yield = plastic_scin->GetMaterialPropertiesTable(); 
@@ -151,7 +154,7 @@ if (std::find(scoringVolumesA.begin(), scoringVolumesA.end(), barvolume) != scor
             
             fEventAction->AddPhotonG_UsingEdep_B(b, generated_photons_B); 
             fEventAction->AddEdepB(b, edep_B);
-            fEventAction->AccumulatedEdx_B(b, dEdxStep_B);  
+            //fEventAction->AccumulatedEdx_B(b, dEdxStep_B);  
         
          }
          }
@@ -163,7 +166,7 @@ if (std::find(scoringVolumesA.begin(), scoringVolumesA.end(), barvolume) != scor
 
 
 //----------------------- DATA WITH SEOCNDARIES -------------------------------------------------------------------------------------------
- if (particle->GetParticleName()!= "opticalphoton" && particle->GetParticleName()!= "mu+" && particle->GetParticleName()!= "pi+" ){
+ /*if (particle->GetParticleName()!= "opticalphoton" && particle->GetParticleName()!= "mu+" && particle->GetParticleName()!= "pi+" ){
 
    G4double edep_A_s  ;
    G4double edep_B_s;
@@ -185,9 +188,7 @@ if (std::find(scoringVolumesA.begin(), scoringVolumesA.end(), barvolume) != scor
          G4int trackID_pos = step->GetTrack()->GetTrackID();
          
          fEventAction->Add_Positions_Layer_A_s(A_pos_x_s, A_pos_y_s, A_pos_z_s, trackID_pos);
-         /*fEventAction->Add_Positions_Layer_A_x_s(A_pos_x_s, trackID_pos);
-         fEventAction->Add_Positions_Layer_A_y_s(A_pos_y_s, trackID_pos);
-         fEventAction->Add_Positions_Layer_A_z_s(A_pos_z_s, trackID_pos);*/
+
        
          
           edep_A_s = step->GetTotalEnergyDeposit();
@@ -232,9 +233,6 @@ if (std::find(scoringVolumesA.begin(), scoringVolumesA.end(), barvolume) != scor
          G4int trackID_pos = step->GetTrack()->GetTrackID();
          
          fEventAction->Add_Positions_Layer_B_s(B_pos_x_s, B_pos_y_s, B_pos_z_s, trackID_pos);
-         /*fEventAction->Add_Positions_Layer_B_x_s(B_pos_x_s, trackID_pos);
-         fEventAction->Add_Positions_Layer_B_y_s(B_pos_y_s, trackID_pos);
-         fEventAction->Add_Positions_Layer_B_z_s(B_pos_z_s, trackID_pos);*/
 
                 
          G4double edep_B_s = step->GetTotalEnergyDeposit();
@@ -262,7 +260,7 @@ if (std::find(scoringVolumesA.begin(), scoringVolumesA.end(), barvolume) != scor
             
          }
          }
-  }
+  }*/
 }
 
 

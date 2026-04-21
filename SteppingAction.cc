@@ -8,11 +8,14 @@ using namespace std;
 SteppingAction::SteppingAction( EventAction *eventaction)
 {
  fEventAction = eventaction;
+
+ /*outFile1.open("/Users/leonardofernandezluna/Documents/SIMULATIONS_GEANT4/(2)_SIM_ARTICLE/BUILD/DATA_RESULTS/Test.dat", std::ios::app);
+outFile1 << "EventID Layer BarID Particle Edep(MeV) X(cm) Y(cm) Z(cm) Photons_Gen\n";*/
 }
 
 
 SteppingAction::~SteppingAction()
-{}
+{outFile1.close();}
 
 
 void SteppingAction::UserSteppingAction(const G4Step *step)
@@ -109,7 +112,19 @@ if (std::find(scoringVolumesA.begin(), scoringVolumesA.end(), barvolume) != scor
             fEventAction->AddPhotonG_UsingEdep_A(a, generated_photons_A);
             fEventAction->AddEdepA(a, edep_A);
            // fEventAction->AccumulatedEdx_A(a, dEdxStep_A);  
-           
+           G4int eventID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
+
+         /*outFile1 
+         << eventID << " "
+         << "A" << " "
+         << a << " "
+         << p_name << " "
+         << edep_A/MeV << " "
+         << A_pos_x << " "
+         << A_pos_y << " "
+         << A_pos_z << " "
+         << generated_photons_A
+         << "\n";*/
            
          }}
       
@@ -155,7 +170,21 @@ if (std::find(scoringVolumesA.begin(), scoringVolumesA.end(), barvolume) != scor
             fEventAction->AddPhotonG_UsingEdep_B(b, generated_photons_B); 
             fEventAction->AddEdepB(b, edep_B);
             //fEventAction->AccumulatedEdx_B(b, dEdxStep_B);  
-        
+
+
+            G4int eventID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
+
+/*outFile1 
+<< eventID << " "
+<< "B" << " "
+<< b << " "
+<< p_name << " "
+<< edep_B/MeV << " "
+<< B_pos_x << " "
+<< B_pos_y << " "
+<< B_pos_z << " "
+<< generated_photons_B
+<< "\n";*/
          }
          }
 } 

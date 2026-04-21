@@ -259,59 +259,11 @@ for(size_t i = 0; i < fEdepB.size(); ++i){
 
 
 //----------------------------------------------------------
-/*
+
 
 
 //-------------------------------------- dE/dx ----------------------------------------------------
-G4cout << "\n===============================================================\n" << G4endl;
-G4cout << "dE/dx (MeV/dx):   " << G4endl;
-G4cout << "\n" <<G4endl;
 
-for (size_t k = 0; k < fTotaldEdx_A.size(); k++){
-    if(fTotaldEdx_A[k]>0){
-      G4cout << "BAR A | " << "ID: "<< k  << " |  dE/dx:  " << fTotaldEdx_A[k] << "  MeV/mm" << G4endl; 
-    }
-     man->FillNtupleDColumn(1, k + fEdepB.size() + fEdepA.size() , fTotaldEdx_A[k] );
-}
-   
-
-for (size_t l = 0; l < fTotaldEdx_B.size(); l++){
-    if(fTotaldEdx_B[l]>0){
-       G4cout << "BAR B | " << "ID: "<<  l + 20  <<" |  dE/dx:  " << fTotaldEdx_B[l] << "  MeV/mm" << G4endl; 
-    }
-     man->FillNtupleDColumn(1, l + fTotaldEdx_A.size() + fEdepA.size() + fEdepB.size(), fTotaldEdx_B[l] );
-}
-
-G4cout << "" << G4endl;
-if (fTotaldEdx_A.size() != fTotaldEdx_A.size() ) {
-    G4cerr << "Error: los tamaños de las listas no coinciden (dEdx)." << G4endl;
-    return;
-}
-
-    for (size_t i = 0; i < fTotaldEdx_A.size(); ++i) {
-        TOTAL_dEdx += fTotaldEdx_A[i] + fTotaldEdx_B[i];
-    }
-     G4cout << "total dE/dx:  " << TOTAL_dEdx <<" MeV / mm\n"<< G4endl;
-
-
-    
-    man->FillNtupleDColumn(1, 167, TOTAL_dEdx);
-
-
-
-//------------------ PER LAYER ----------------------
-
-for(size_t i = 0; i < fTotaldEdx_A.size(); ++i){
-    if(fTotaldEdx_A[i] > 0){
-        man->FillNtupleDColumn(1,174,fTotaldEdx_A[i]);
-    }
-}
-
-for(size_t i = 0; i < fTotaldEdx_B.size(); ++i){
-    if(fTotaldEdx_B[i] > 0){
-        man->FillNtupleDColumn(1,175,fTotaldEdx_B[i]);
-    }
-}
 //---------------------------------------------------
 
 
@@ -319,76 +271,6 @@ for(size_t i = 0; i < fTotaldEdx_B.size(); ++i){
 
 
 //-------------------------------- DETECTED PHOTONS ---------------------------------------------------------
-/*G4cout << "\n===============================================================" << G4endl;
-G4cout << "" << G4endl;
-G4cout << "DETECTED PHOTONS ON SiPM's:   " << G4endl;
-G4cout << "\n" <<G4endl;
-
-for (size_t m = 0; m < photonHits_event_A.size(); m++){
-    if(photonHits_event_A[m]>0){
-        G4cout << "SiPM A | " <<"ID: "<<  m  << " |  Detected photons:  " << photonHits_event_A[m] << "  photons" << G4endl;   
-    }
-    man->FillNtupleDColumn(1, m + fTotaldEdx_B.size()+ fTotaldEdx_A.size() + fEdepB.size() + fEdepA.size() ,  photonHits_event_A[m] ); 
-}
-
-for (size_t n = 0; n < photonHits_event_B.size(); n++){
-    if(photonHits_event_B[n]>0){
-        G4cout << "SiPM B | " <<"ID: "<< n + 20 << " |  Detected photons:  " << photonHits_event_B[n] << "  photons" << G4endl; 
-       }
-     man->FillNtupleDColumn(1, n + photonHits_event_A.size() + fTotaldEdx_B.size()+ fTotaldEdx_A.size() + fEdepB.size() + fEdepA.size() ,  photonHits_event_B[n] );
-}
-
-//............................................................................................
-if (photonHits_event_A.size() != photonHits_event_B.size() ) {
-    G4cout << "Error: los tamaños de las listas no coinciden (Detected Photons)." << G4endl;
-    return;
-}
-
-//             TO GET THE RIGHT NUMBER OF DETECTED PHOTONS 
-
-G4cout << "\n"<<G4endl;
-G4cout << "(by mu+ and pi+)"<<G4endl;
-G4cout << ""<<G4endl;
-G4int photons_detected_real_A = 0.0;
-G4int photons_detected_real_B = 0.0;
-
-
-
-
-    for (auto bar : traversed_Bars_A) {
-        if(bar >=0 && bar <20){
-            photons_detected_real_A += photonHits_event_A[bar];
-            G4cout <<"SiPM A | ID: "<< bar  <<G4endl;
-            man->FillNtupleDColumn(1,176,photons_detected_real_A);
-
-        } else{
-            G4cerr << " ERROR: índice inválido en traversed_Bars_A: " << bar << G4endl;
-        }   
-    }
-    
-    for (auto bar : traversed_Bars_B) {
-        if(bar >=20 && bar <40){
-            photons_detected_real_B += photonHits_event_B[bar-20];
-                G4cout <<"SiPM B | ID: "<< bar  <<G4endl;
-            man->FillNtupleDColumn(1,177,photons_detected_real_B);
-
-        } else {
-            G4cerr << "ERROR: índice inválido en traversed_Bars_B: " << bar << G4endl;
-        }
-    }
-
-    if(photons_detected_real_A > 0 && photons_detected_real_B > 0){
-    TOTAL_Detected_photons = photons_detected_real_A + photons_detected_real_B;
-    }
-
-    G4cout << "\n" << G4endl;
-    G4cout <<"TOTAL DETECTED PHOTONS: "<< TOTAL_Detected_photons << " photons \n"<< G4endl;       
-            
-    man->FillNtupleIColumn(1, 168, TOTAL_Detected_photons);
-
-*/
-
-
 
 
 
@@ -528,7 +410,7 @@ G4cout << "" << G4endl;
 G4cout << "BAR A | ID: ";
 if (traversed_Bars_A.empty()) {
     G4cout << "-1 | NO HIT ";
-    man->FillNtupleDColumn(0, , 41-1);
+    man->FillNtupleDColumn(0, 41, -1);
 } else {
     for (auto bar : traversed_Bars_A) {
         G4cout << bar << " ";

@@ -22,7 +22,7 @@ class RunAction : public G4UserRunAction
 
   void Add_DetectedPhotons_run_all_SiPMs(G4int sipmID) 
   {
-    if (sipmID >= 0 && sipmID < 40) 
+    if (sipmID >= 0 && sipmID < 20) 
     {
         photonHits[sipmID]++;
     }

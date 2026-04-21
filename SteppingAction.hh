@@ -11,6 +11,8 @@
 #include "G4RandomTools.hh"
 #include "G4Poisson.hh"
 #include "G4LogicalVolume.hh"
+#include <fstream>
+
 
 
 class SteppingAction : public G4UserSteppingAction
@@ -30,6 +32,8 @@ private:
  
  G4double generated_photons_A;
  G4double generated_photons_B;
+
+ std::ofstream outFile1;
 
 
 };

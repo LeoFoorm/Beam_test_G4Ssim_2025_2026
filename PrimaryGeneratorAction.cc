@@ -13,14 +13,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
  fParticleGun->SetParticleDefinition(particle);
 
 
-//columna 12 (8)
-posX = 0*cm;
-posZ = 0*cm;
 
-sigma_x = 0.00701693;
-sigma_z = 0.0071868;
-
-posY = 3.7156*m;
 
 }
 
@@ -35,7 +28,14 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
 
 G4double momentumParticle = 2.0;
+//columna 12 (8)
+posX = 18.957*cm;
+posZ = -18.857*cm;
 
+sigma_x = 0.00701693;
+sigma_z = 0.0071868;
+
+posY = 3.7156*m;
 
 G4double theta_x = G4RandGauss::shoot(0., sigma_x);
 G4double theta_z = G4RandGauss::shoot(0., sigma_z);
@@ -91,7 +91,7 @@ G4AnalysisManager *man = G4AnalysisManager::Instance();
 //G4double Zpos = 8.153*cm;
 //G4double Zpos = 18.957*cm;
 
-
+    
 //columna 14 (6)
 //G4double Xpos = 8.153*cm;
 //G4double Zpos = -18.857*cm;

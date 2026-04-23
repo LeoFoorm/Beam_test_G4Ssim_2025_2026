@@ -11,6 +11,7 @@
 #include "G4ThreeVector.hh"
 #include <cmath>
 #include <vector>
+#include <fstream>
 
 using namespace std;
 
@@ -51,45 +52,6 @@ std::vector<G4int> GetPhotonHits_B() const{return photonHits_event_B;}*/
 
 
 
-//--------------------- JUST SECONDARIES --------------------------------
-
-/*void Add_DetectedPhotons_event_A_SiPMs_s (G4int sipmID_a_s)
-{
-    if (sipmID_a_s >= 0 && sipmID_a_s < 20 )
-    {
-        photonHits_event_A_s[sipmID_a_s]++;
-    }
-}
-std::vector<G4int> GetPhotonHits_A_s() const{return photonHits_event_A_s;}
-
-
-void Add_DetectedPhotons_event_B_SiPMs_s (G4int sipmID_b_s)
-{
-    if (sipmID_b_s >= 0 && sipmID_b_s < 20 )
-    {
-        photonHits_event_B_s[sipmID_b_s]++;
-    }
-}
-std::vector<G4int> GetPhotonHits_B_s() const{return photonHits_event_B_s;}*/
-
-
-//**************************************************************************************    
-//G4int GetTotalDetectedPhotons_Others() const { return TOTAL_Detected_photons_others; }
-//G4int GetDetectedPhotons_Others_A() const { return photons_detected_others_A; }
-//G4int GetDetectedPhotons_Others_B() const { return photons_detected_others_B; }
-//**************************************************************************************   
-
-//---------------------------------------------------------
-//void AddLocalTime(G4int sipmID, G4double ltime) 
-//{
- //   if (sipmID >= 0 && sipmID < 40) 
-  //  {
-  //      localTimes[sipmID] += ltime;
-  //  }
-//}
-// std::vector<G4double> GetLocalTimes() const {return localTimes;
-//---------------------------------------------------------
-
 
 
 //-------------------- TOTAL EDEP  --------------------
@@ -121,58 +83,6 @@ std::vector<G4double> GetEdepB() const { return fEdepB; }
 //-----------------------------------------------------------
 
 
-//---------- JUST SECONDARIES ---------------
-
-/*void AddEdepA_s(G4int E_A_s, G4double edep_A_s)
-{ 
-    if (E_A_s >= 0 && E_A_s < fEdepA_s.size()) 
-    {
-        fEdepA_s[E_A_s] += edep_A_s;
-    }
-}
-std::vector<G4double> GetEdepA_s() const { return fEdepA_s; }
-
-
-void AddEdepB_s(G4int E_B_s, G4double edep_B_s)
-{ 
-    if (E_B_s >= 0 && E_B_s < fEdepB_s.size()) 
-    {
-        fEdepB_s[E_B_s] += edep_B_s;
-    }
-}
-std::vector<G4double> GetEdepB_s() const { return fEdepB_s; }
-
-
-
-
-
-//----------------------- dE/dx ---------------------------------
-
-
-void AccumulatedEdx_A(G4int dEdx_a, G4double dEdxStep_A) 
-{
-    if (dEdx_a >= 0 && dEdx_a < fTotaldEdx_A.size() )
-    {
-         fTotaldEdx_A[dEdx_a] += dEdxStep_A;
-    }
-}
-std::vector<G4double> GetdEdx_A() const { return fTotaldEdx_A; }
-
-
-void AccumulatedEdx_B(G4int dEdx_b, G4double dEdxStep_B) 
-{
-    if (dEdx_b >= 0 && dEdx_b < fTotaldEdx_B.size() )
-    {
-         fTotaldEdx_B[dEdx_b] += dEdxStep_B;
-    }
-}
-std::vector<G4double> GetdEdx_B() const { return fTotaldEdx_B; }
-
-
-
-//void AdddEdx_abs(G4double dedx_abs){fdEdx_abs += dedx_abs;}*/
-
-
 
 
 //------------------------- GENERATED PHOTONS --------------------------------
@@ -199,31 +109,6 @@ void AddPhotonG_UsingEdep_B(G4int PhotonGen_b, G4double generated_photons_B)
 
 
 
-
-
- //------------------- JUST SECONDARIES -----------------------------------------------------
-/*void AddPhotonG_UsingEdep_A_s(G4int PhotonGen_a_s, G4int generated_photons_A_s) 
-{
-   if (PhotonGen_a_s >= 0 && PhotonGen_a_s < fGenerated_photons_A_s.size())
-   {
-       fGenerated_photons_A_s[PhotonGen_a_s] += generated_photons_A_s;
-   }
-}
-std::vector<G4int> GetPhotonCount_Edep_A_s() const { return fGenerated_photons_A_s; }
-
-
-void AddPhotonG_UsingEdep_B_s(G4int PhotonGen_b_s, G4int generated_photons_B_s)
-{
-   if (PhotonGen_b_s >= 0 && PhotonGen_b_s <fGenerated_photons_B_s.size())
-   {
-       fGenerated_photons_B_s[PhotonGen_b_s] += generated_photons_B_s;
-   }
-}
-std::vector<G4int> GetPhotonCount_Edep_B_s() const { return fGenerated_photons_B_s; }*/
-
-
-
-
 //-------------------------- BAR ID -----------------------------
 //-------------- JUST MUONS/PION --------------------------------------------------------------------------------------------- 
 void AddTraversedBar_A (G4int barA){
@@ -242,29 +127,6 @@ void AddTraversedBar_B (G4int barB){
         }
 }
 std::vector<G4int> GetTraversedBars_B() const {return traversed_Bars_B;}
-
-
-
-
-
-//-------------- JUST SECONDARIES --------------------------------------------------------------------------------------------- 
-/*void AddTraversedBar_A_s (G4int barA_s){
-
-    if (std::find(traversed_Bars_A_s.begin(), traversed_Bars_A_s.end(), barA_s) == traversed_Bars_A_s.end()) {  
-      traversed_Bars_A_s.push_back(barA_s);
-    }
-}
-std::vector<G4int> GetTraversedBars_A_s() const {return traversed_Bars_A_s;}
-
-
-void AddTraversedBar_B_s (G4int barB_s){
-
-    if (std::find(traversed_Bars_B_s.begin(), traversed_Bars_B_s.end(), barB_s) == traversed_Bars_B_s.end()) {
-       traversed_Bars_B_s.push_back(barB_s);
-    }
-}
-std::vector<G4int> GetTraversedBars_B_s() const {return traversed_Bars_B_s;}*/
-
 
 
 
@@ -293,29 +155,6 @@ void Particle_Name_Pierced_Layer_B(G4String name_b, G4int trackID){
 }
 
 vector<G4String> Get_particle_names_B() const {return particles_names_B;}
-
-
-//--------------- JUST SECONDARIES ------------------------
-/*void Particle_Name_Pierced_Layer_A_s(G4String name_a_s, G4int trackID){    
-    if (particle_name_tracks_A_s.find(trackID) == particle_name_tracks_A_s.end()) {
-    particles_names_A_s.push_back(name_a_s);
-    particle_name_tracks_A_s.insert(trackID); 
-}
-}
-
-vector<G4String> Get_particle_names_A_s() const {return particles_names_A_s;}
-
-
-
-void Particle_Name_Pierced_Layer_B_s(G4String name_b_s, G4int trackID){
-    if (particle_name_tracks_B_s.find(trackID) == particle_name_tracks_B_s.end()) {
-    particles_names_B_s.push_back(name_b_s);
-    particle_name_tracks_B_s.insert(trackID); 
-}
-}
-
-vector<G4String> Get_particle_names_B_s() const {return particles_names_B_s;}*/
-
 
 
 
@@ -356,45 +195,6 @@ vector<G4double> Get_pos_z_b() const {return pos_layer_B_z;}
 
 
 
-
-
-
-
-
-
-//-------------------- JUST SECONDARIES ---------------------------
-//-------------------- LAYER A --------------------------
-/*void Add_Positions_Layer_A_s(G4double pos_xa_s, G4double pos_ya_s, G4double pos_za_s, G4int trackID_pos){
-    if (particle_tracks_A_s.find(trackID_pos) == particle_tracks_A_s.end()){ 
-    pos_layer_A_x_s.push_back(pos_xa_s);
-    pos_layer_A_y_s.push_back(pos_ya_s);
-    pos_layer_A_z_s.push_back(pos_za_s);
-    particle_tracks_A_s.insert(trackID_pos);
-}
-}
-vector<G4double> Get_pos_x_a_s() const {return pos_layer_A_x_s;}
-vector<G4double> Get_pos_y_a_s() const {return pos_layer_A_y_s;}
-vector<G4double> Get_pos_z_a_s() const {return pos_layer_A_z_s;}
-
-
-
-
-//-------------------- LAYER B --------------------------
-void Add_Positions_Layer_B_s(G4double pos_xb_s, G4double pos_yb_s, G4double pos_zb_s, G4int trackID_pos){
-    if (particle_tracks_B_s.find(trackID_pos) == particle_tracks_B_s.end()){
-    pos_layer_B_x_s.push_back(pos_xb_s);
-    pos_layer_B_y_s.push_back(pos_yb_s);
-    pos_layer_B_z_s.push_back(pos_zb_s);
-    particle_tracks_B_s.insert(trackID_pos);
-}
-}
-vector<G4double> Get_pos_x_b_s() const {return pos_layer_B_x_s;}
-vector<G4double> Get_pos_y_b_s() const {return pos_layer_B_y_s;}
-vector<G4double> Get_pos_z_b_s() const {return pos_layer_B_z_s;}*/
-
-
-
-
 //---------------------------------------------------------
 
 
@@ -405,8 +205,6 @@ std::vector<G4int> photonHits_event_A;
 std::vector<G4int> photonHits_event_B;
 
 
-std::vector<G4int> photonHits_event_A_s;
-std::vector<G4int> photonHits_event_B_s;
 
 
 std::vector<G4double> localTimes;
@@ -417,20 +215,11 @@ std::vector<G4double> fEdepB;
 
 
 
-std::vector<G4double> fEdepA_s;
-std::vector<G4double> fEdepB_s;
-
-
-std::vector<G4double> fTotaldEdx_A;
-std::vector<G4double> fTotaldEdx_B;
-
 
 std::vector<G4int> fGenerated_photons_A;
 std::vector<G4int> fGenerated_photons_B;
 
 
-std::vector<G4int> fGenerated_photons_A_s;
-std::vector<G4int> fGenerated_photons_B_s;
 
 
 std::vector<G4int> traversed_Bars_A; 
@@ -438,8 +227,6 @@ std::vector<G4int> traversed_Bars_B;
 
 
 
-std::vector<G4int> traversed_Bars_A_s;
-std::vector<G4int> traversed_Bars_B_s;
 
 
 vector<G4String> particles_names_A; 
@@ -449,19 +236,13 @@ std::set<G4int> particle_tracks_B;  // Para trackear partículas únicas en capa
 std::set<G4int> particle_name_tracks_A;  //<---- NEW
 std::set<G4int> particle_name_tracks_B;  //<---- NEW
 
-vector<G4String> particles_names_A_s;
-vector<G4String> particles_names_B_s;
 
-std::set<G4int> particle_tracks_A_s;  //<---- NEW
-std::set<G4int> particle_tracks_B_s;  //<---- NEW
-std::set<G4int> particle_name_tracks_A_s;  //<---- NEW
-std::set<G4int> particle_name_tracks_B_s; 
 
 G4double TOTAL_Edep;
-G4double TOTAL_dEdx;
+
 
 G4double fEdep_abs;
-G4double fdEdx_abs;
+
 
 G4int TOTAL_Detected_photons;
 G4double TOTAL_Generated_photons;
@@ -469,13 +250,7 @@ G4double TOTAL_Generated_photons;
 G4double total_edep_A;
 G4double total_edep_B;
 
-G4double TOTAL_Edep_s;
 
-
-G4int TOTAL_Detected_photons_s;
-
-
-G4double TOTAL_Generated_photons_s;
 
 
 vector<G4double> pos_layer_A_x;
@@ -487,13 +262,6 @@ vector<G4double> pos_layer_B_y;
 vector<G4double> pos_layer_B_z;
 
 
-vector<G4double> pos_layer_A_x_s;
-vector<G4double> pos_layer_A_y_s;
-vector<G4double> pos_layer_A_z_s;
-
-vector<G4double> pos_layer_B_x_s;
-vector<G4double> pos_layer_B_y_s;
-vector<G4double> pos_layer_B_z_s;
 
  G4int muonCount;
 
@@ -502,9 +270,8 @@ vector<G4double> pos_layer_B_z_s;
 
  G4int Sumcopies;
 
-G4int TOTAL_Detected_photons_others = 0; //<---- NEW
-G4int photons_detected_others_A = 0;     //<---- NEW
-G4int photons_detected_others_B = 0;    //<---- NEW
+
+std::ofstream outFile;
 
 };
 

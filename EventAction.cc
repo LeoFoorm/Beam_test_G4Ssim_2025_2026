@@ -1,6 +1,7 @@
 //   EVENT ACTION SOURCE
 
 #include "EventAction.hh" 
+#include <iostream>
 using namespace std;
 
 
@@ -10,19 +11,10 @@ fEdepA.resize(10, 0.0);
 fEdepB.resize(10, 0.0); 
 
 
-//fEdepA_s.resize(20, 0.0);
-//fEdepB_s.resize(20, 0.0);
-
-
-//fTotaldEdx_A.resize(20, 0.0);
-//fTotaldEdx_B.resize(20, 0.0);
-
 
 fGenerated_photons_A.resize(10, 0.0);
 fGenerated_photons_B.resize(10, 0.0);
 
-//fGenerated_photons_A_s.resize(20, 0.0);
-//fGenerated_photons_B_s.resize(20, 0.0);
 
 
  muonCount = 0;
@@ -32,30 +24,20 @@ fGenerated_photons_B.resize(10, 0.0);
     traversed_Bars_B.clear();
 
 
-  //  traversed_Bars_A_s.clear();
-  //  traversed_Bars_B_s.clear();
-
-
     Hit_particle_passed_two_layers = false;
     Sumcopies = 0;
 
     TOTAL_Edep = 0.0;
-    //TOTAL_dEdx = 0.0;
-    //TOTAL_Detected_photons = 0.0;
+
     TOTAL_Generated_photons = 0.0;
     total_edep_A = 0.0;
     total_edep_B = 0.0;
 
-    //TOTAL_Edep_s = 0.0;
-    //TOTAL_Detected_photons_s = 0.0;
-    //TOTAL_Generated_photons_s = 0.0;;
+
 
 
     particles_names_A.clear();
     particles_names_B.clear();
-    //particles_names_A_s.clear();
-    //particles_names_B_s.clear();
-
 
 
     pos_layer_A_x.clear();
@@ -67,34 +49,26 @@ fGenerated_photons_B.resize(10, 0.0);
     pos_layer_B_z.clear();
 
 
-    //pos_layer_A_x_s.clear();
-    //pos_layer_A_y_s.clear();
-    //pos_layer_A_z_s.clear();
-
-    //pos_layer_B_x_s.clear();
-    //pos_layer_B_y_s.clear();
-    //pos_layer_B_z_s.clear();
-
-
-    //fEdep_abs = 0;
-    //fdEdx_abs = 0;
-
-//TOTAL_Detected_photons_others = 0; 
-  //  photons_detected_others_A = 0;  
-    //photons_detected_others_B = 0;  
-
 
     particle_name_tracks_A.clear();  
     particle_name_tracks_B.clear();  
+  
+    
+    outFile.open("Test.dat");  // ⚠️ sin std::ios::app para evitar duplicados
 
-    //particle_name_tracks_A_s.clear();    
-    //particle_name_tracks_B_s.clear();    
+    // encabezado (opcional pero recomendado)
+    outFile << "EventID ";
+    for(int i=0;i<10;i++) outFile << "EdepA_" << i << " ";
+    for(int i=0;i<10;i++) outFile << "EdepB_" << i << " ";
+    outFile << "TotalEdep\n";
+
+
 
 }
 
 
 EventAction::~EventAction()
-{}
+{ outFile.close();}
 
 
 
@@ -103,26 +77,19 @@ void EventAction::BeginOfEventAction(const G4Event*)
     photonHits_event_A.assign(10, 0);
     photonHits_event_B.assign(10, 0);
 
-    //photonHits_event_A_s.assign(20, 0); 
-    //photonHits_event_B_s.assign(20, 0); 
+
     
     fEdepA.assign(10, 0.0); 
     fEdepB.assign(10, 0.0);
 
-    //fEdepA_s.assign(20, 0.0);
-    //fEdepB_s.assign(20, 0.0);
 
-
-    //fTotaldEdx_A.assign(20, 0.0);
-    //fTotaldEdx_B.assign(20, 0.0);
 
 
     fGenerated_photons_A.assign(10, 0.0);
     fGenerated_photons_B.assign(10, 0.0);
 
 
-    //fGenerated_photons_A_s.assign(20, 0.0);
-    //fGenerated_photons_B_s.assign(20, 0.0);
+
 
 
  muonCount++;
@@ -134,8 +101,7 @@ void EventAction::BeginOfEventAction(const G4Event*)
     traversed_Bars_B.clear();
 
     
-    //traversed_Bars_A_s.clear();
-    //traversed_Bars_B_s.clear();
+
 
 
     Sumcopies = 0;  
@@ -143,31 +109,25 @@ void EventAction::BeginOfEventAction(const G4Event*)
     
 
     TOTAL_Edep = 0.0;
-    TOTAL_dEdx = 0.0;
+   
     TOTAL_Detected_photons = 0.0;
     TOTAL_Generated_photons = 0.0;
     total_edep_A = 0.0;
     total_edep_B = 0.0;
 
 
-    TOTAL_Edep_s = 0.0;
-    TOTAL_Detected_photons_s = 0.0;
-    TOTAL_Generated_photons_s = 0.0;
+
+
 
 
     particles_names_A.clear();
     particles_names_B.clear();
 
-    //particles_names_A_s.clear();
-    //particles_names_B_s.clear();
 
        
 
     particle_name_tracks_A.clear(); 
-    particle_name_tracks_B.clear();  
-
-    //particle_name_tracks_A_s.clear();    
-    //particle_name_tracks_B_s.clear();    
+    particle_name_tracks_B.clear();   
 
 
 
@@ -181,26 +141,16 @@ void EventAction::BeginOfEventAction(const G4Event*)
     pos_layer_B_z.clear();
 
 
-    /*pos_layer_A_x_s.clear();
-    pos_layer_A_y_s.clear();
-    pos_layer_A_z_s.clear();
-
-    pos_layer_B_x_s.clear();
-    pos_layer_B_y_s.clear();
-    pos_layer_B_z_s.clear();*/
 
 
-    fEdep_abs = 0;
-    fdEdx_abs = 0;
+    //fEdep_abs = 0;
 
-    TOTAL_Detected_photons_others = 0;  
-    photons_detected_others_A = 0;  
-    photons_detected_others_B = 0;  
+
 }
 
 
 
-void EventAction::EndOfEventAction(const G4Event*)
+void EventAction::EndOfEventAction(const G4Event*event)
 {
 
 G4AnalysisManager *man = G4AnalysisManager::Instance();  
@@ -224,6 +174,7 @@ for (size_t j = 0; j < fEdepB.size(); j++){
     man->FillNtupleDColumn(0, j + fEdepA.size(), fEdepB[j] );
     
 }
+
 
 G4cout << "" << G4endl;
 if (fEdepA.size() != fEdepB.size() ) {
@@ -273,7 +224,28 @@ for(size_t i = 0; i < fEdepB.size(); ++i){
 //-------------------------------- DETECTED PHOTONS ---------------------------------------------------------
 
 
+/*G4int eventID = event->GetEventID();
 
+    outFile << eventID << " ";
+
+    // Energía capa A
+    for (size_t i = 0; i < fEdepA.size(); i++){
+        outFile << fEdepA[i] << " ";
+    }
+
+    // Energía capa B
+    for (size_t i = 0; i < fEdepB.size(); i++){
+        outFile << fEdepB[i] << " ";
+    }
+
+    // Energía total
+    G4double totalE = 0;
+    for(auto e : fEdepA) totalE += e;
+    for(auto e : fEdepB) totalE += e;
+
+    outFile << totalE;
+
+    outFile << "\n";*/
 
 //----------------------------------------GENERATED PHOTONS-------------------------------------------------
 G4cout << "" << G4endl;
@@ -341,61 +313,7 @@ G4cout << "\n------------------------------------------------------------" << G4
 
 
 
-    //----------------------- Secondaries ----------------------------------
-/*G4cout << "" << G4endl;
-G4cout << "GENERATED PHOTONS BY SECONDARIES PARTICLES ON BARS:   \n" << G4endl;
-for (size_t i = 0; i < fGenerated_photons_A_s.size(); i++){
-    if(fGenerated_photons_A_s[i]>0.0000001){
-    G4cout << "BAR A | " << "ID: "<< i << " |  Generated photons:  " << fGenerated_photons_A_s[i] << "  photons" << G4endl;
-      } 
- 
-}
-
-for (size_t j = 0; j < fGenerated_photons_B_s.size(); j++){
-    if(fGenerated_photons_B_s[j]>0.0000001){
-       G4cout << "BAR B | "<<"ID: "<< j + 20  << " |  Generated photons:  " << fGenerated_photons_B_s[j] << "  photons" << G4endl; 
-    }
-
-    
-}
-
-G4cout << "" << G4endl;
-if (fGenerated_photons_A_s.size() != fGenerated_photons_B_s.size() ) {
-    G4cerr << "Error: los tamaños de las listas no coinciden." << G4endl;
-    return;
-}
-
-
-for (size_t i = 0; i < fGenerated_photons_A_s.size(); ++i) {
-    photons_gen_A_s += fGenerated_photons_A_s[i];
-}
-for (size_t i = 0; i < fGenerated_photons_B_s.size(); ++i) {
-    photons_gen_B_s += fGenerated_photons_B_s[i];
-}
-
-    
-
-    TOTAL_Generated_photons_s += photons_gen_A_s + photons_gen_B_s;
-
-
-    G4cout << "TOTAL GENERATED PHOTONS BY SECONDARIES PARTICLES:  " << TOTAL_Generated_photons_s << " photons"<<G4endl;
-    man->FillNtupleDColumn(1, 198, TOTAL_Generated_photons_s); 
-
-
-//------------------ PER LAYER ----------------------
-for(size_t i = 0; i < fGenerated_photons_A_s.size(); ++i){
-    if(fGenerated_photons_A_s[i] > 0.0000001){
-        man->FillNtupleDColumn(1, 199,fGenerated_photons_A_s[i]);
-    }
-}
-
-for(size_t i = 0; i < fGenerated_photons_B_s.size(); ++i){
-    if(fGenerated_photons_B_s[i] > 0.0000001){
-       man->FillNtupleDColumn(1, 200,fGenerated_photons_B_s[i]);
-    }
-}
-
-G4cout << "\n===============================================================" << G4endl;*/
+//G4cout << "\n===============================================================" << G4endl;
 
 
 
@@ -459,36 +377,6 @@ if (traversed_Bars_A.empty()) {
 
 
         G4cout << "--------------------------------------------------------------------------------" << G4endl;
-    /*G4cout <<"BARS ID SECONDARY \n"<<G4endl;
-    G4cout << "BAR A | ID: ";
-    if (traversed_Bars_A_s.empty()) {
-        G4cout << "-1 | NO HIT ";
-        man->FillNtupleDColumn(2, 0, -1);
-    } else {
-        for (auto bar : traversed_Bars_A_s) {
-            G4cout << bar << " ";
-           man->FillNtupleDColumn(2, 0,bar);
-        }
-    }
-     G4cout << G4endl;
-     G4cout << "BAR B | ID: ";
-        if(traversed_Bars_B_s.empty()){
-            G4cout<< "0 | NO HIT ";
-            man->FillNtupleDColumn(2, 1, 0);
-        }else{
-        for (auto bar : traversed_Bars_B_s) {
-            G4cout << bar << " ";
-            
-            man->FillNtupleDColumn(2, 1,bar);
-        }
-        }
-        G4cout << G4endl;
-    
-        G4cout <<"\n"<<G4endl;*/
-
-
-
-
 
 
 
@@ -519,33 +407,6 @@ if (particles_names_B.empty()) {
         G4cout << p_name << ", \n";
         man->FillNtupleSColumn(0, 46, p_name);
     }}
-
-
-//------------------------------------------------------------------------------------------------
-    /*G4cout << "\nSecondary \n"<<G4endl;
-
-    G4cout << "PARTICLES ON LAYER A: " <<  G4endl;
-    
-    if (particles_names_A_s.empty()) {
-        G4cout << "**No particles pierced Layer A in this event. \n" << G4endl;
-    } else {
-        for (auto p_name : particles_names_A_s) {
-            G4cout << p_name << ", \n";
-          man->FillNtupleSColumn(2, 2, p_name);
-        }}
-    
-    
-    G4cout << "PARTICLES ON LAYER B: " <<  G4endl;
-    
-    if (particles_names_B_s.empty()) {
-       G4cout << "**No particles pierced Layer B in this event. \n" << G4endl;
-    } else {
-        for (auto p_name : particles_names_B_s) {
-            G4cout << p_name << ", \n";
-            man->FillNtupleSColumn(2, 3, p_name);
-        }}
-    G4cout <<"\n" <<G4endl;*/
-    
 
 
 
@@ -597,62 +458,7 @@ for(const auto& pos_z_B :pos_layer_B_z){
 G4cout << "\n" << G4endl;
 
 
-/*G4cout << "------------------------ SECONDARY ------------------------------------" << G4endl;
-G4cout << G4endl;
-
-G4cout <<"LAYER A | POSITION X : " << G4endl;
-for(const auto& pos_x_A :pos_layer_A_x_s){
-        G4cout << pos_x_A << " cm, ";
-        man->FillNtupleDColumn(2, 4, pos_x_A);
-
-}
-G4cout << "" << G4endl;
-G4cout <<"LAYER A | POSITION Y: " << G4endl;
-for(const auto& pos_y_A :pos_layer_A_y_s){
-        G4cout << pos_y_A << " cm, ";
-        man->FillNtupleDColumn(2, 5, pos_y_A);
-}
-G4cout << "" << G4endl;
-G4cout <<"LAYER A | POSITION Z: " << G4endl;
-for(const auto& pos_z_A :pos_layer_A_z_s){
-        G4cout << pos_z_A << " cm, ";
-        man->FillNtupleDColumn(2, 6, pos_z_A);
-}
-G4cout << "" << G4endl;
-G4cout << "" << G4endl;
-
-G4cout <<"LAYER B | POSITION X: "<< G4endl;
-for(const auto& pos_x_B :pos_layer_B_x_s){
-        G4cout << pos_x_B << " cm, ";
-        man->FillNtupleDColumn(2, 7, pos_x_B);
-}
-G4cout << "" << G4endl;
-G4cout <<"LAYER B | POSITION Y: " << G4endl;
-for(const auto& pos_y_B :pos_layer_B_y_s){
-        G4cout << pos_y_B << " cm, ";
-        man->FillNtupleDColumn(2, 8, pos_y_B);
-}
-G4cout << "" << G4endl;
-G4cout <<"LAYER B | POSITION Z: " << G4endl;
-for(const auto& pos_z_B :pos_layer_B_z_s){
-        G4cout << pos_z_B << " cm, ";
-       man->FillNtupleDColumn(2, 9, pos_z_B);
-}
-
-G4cout << "\n" << G4endl;
-G4cout <<"===============================================================" << G4endl;*/
-
-
-
-
-//-----------------  ANGLE  -----------------
-
-
-G4cout<<"\n"<<G4endl;
-
-
 man->AddNtupleRow(0);
-
 
 }
 

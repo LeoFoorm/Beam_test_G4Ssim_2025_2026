@@ -1,8 +1,3 @@
-/run/numberOfThreads 4
+/run/numberOfThreads 2
 /run/initialize
-/gun/position 18 371 -18 cm
 /run/beamOn 10
-/gun/position 18 371 -18 cm <--- cambiar
-/run/beamOn 10
-#colocar eventID en steppingaction para ver como se guardan los datos
-#Hacer prueba con 10 eventos. 

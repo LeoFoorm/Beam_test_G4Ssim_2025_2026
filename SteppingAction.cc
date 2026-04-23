@@ -9,13 +9,11 @@ SteppingAction::SteppingAction( EventAction *eventaction)
 {
  fEventAction = eventaction;
 
- /*outFile1.open("/Users/leonardofernandezluna/Documents/SIMULATIONS_GEANT4/(2)_SIM_ARTICLE/BUILD/DATA_RESULTS/Test.dat", std::ios::app);
-outFile1 << "EventID Layer BarID Particle Edep(MeV) X(cm) Y(cm) Z(cm) Photons_Gen\n";*/
 }
 
 
 SteppingAction::~SteppingAction()
-{outFile1.close();}
+{}
 
 
 void SteppingAction::UserSteppingAction(const G4Step *step)
@@ -44,26 +42,12 @@ G4StepPoint *PreStep = step->GetPreStepPoint();
  
 if(particle->GetParticleName()== "mu+" ||  particle->GetParticleName() == "pi+" ){
 
-   G4double dEdxStep_A ; 
-   G4double dEdxStep_B ;
    G4double generated_photons_A;
    G4double generated_photons_B ;
 
 
-   /*if(barvolume == scoringVolume_Absorber){
-      
-	   G4double edep_abs ;
-	   G4double dEdx_abs ;
 
-	   edep_abs = step-> GetTotalEnergyDeposit();
-	   if (edep_abs > 0. && stepLength > 0.){
-		fEventAction->AddEdepAbs(edep_abs);
-	   }
-      
-   }*/
-   
 
- 
 
 
 if (std::find(scoringVolumesA.begin(), scoringVolumesA.end(), barvolume) != scoringVolumesA.end())
@@ -95,7 +79,7 @@ if (std::find(scoringVolumesA.begin(), scoringVolumesA.end(), barvolume) != scor
             G4int trackID = step->GetTrack()->GetTrackID();     
             fEventAction->Particle_Name_Pierced_Layer_A(p_name, trackID);
 
-            //dEdxStep_A = edep_A / stepLength ;
+
 
             G4Material *plastic_scin = step->GetPreStepPoint()->GetMaterial(); 
             G4MaterialPropertiesTable *Yield = plastic_scin->GetMaterialPropertiesTable(); 
@@ -104,27 +88,17 @@ if (std::find(scoringVolumesA.begin(), scoringVolumesA.end(), barvolume) != scor
             generated_photons_A = edep_A * Scintillation_Yield; 
             generated_photons_A = G4Poisson(generated_photons_A); 
 
-            //std::ofstream outFile1("/Users/leonardofernandezluna/Documents/SIMULATIONS_GEANT4/(2)_SIM_ARTICLE/BUILD/DATA_RESULTS/Test.dat",std::ios::app);
+          
 
             size_t a = std::distance(scoringVolumesA.begin(),
                                               std::find(scoringVolumesA.begin(), scoringVolumesA.end(), barvolume));
             
             fEventAction->AddPhotonG_UsingEdep_A(a, generated_photons_A);
             fEventAction->AddEdepA(a, edep_A);
-           // fEventAction->AccumulatedEdx_A(a, dEdxStep_A);  
+ 
            G4int eventID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
 
-         /*outFile1 
-         << eventID << " "
-         << "A" << " "
-         << a << " "
-         << p_name << " "
-         << edep_A/MeV << " "
-         << A_pos_x << " "
-         << A_pos_y << " "
-         << A_pos_z << " "
-         << generated_photons_A
-         << "\n";*/
+
            
          }}
       
@@ -155,7 +129,6 @@ if (std::find(scoringVolumesA.begin(), scoringVolumesA.end(), barvolume) != scor
             G4int trackID = step->GetTrack()->GetTrackID();         //<--- NEW
             fEventAction->Particle_Name_Pierced_Layer_B(p_name, trackID);  
 
-             //dEdxStep_B = edep_B  / stepLength ;
 
             G4Material *plastic_scin = step->GetPreStepPoint()->GetMaterial(); 
             G4MaterialPropertiesTable *Yield = plastic_scin->GetMaterialPropertiesTable(); 
@@ -169,22 +142,12 @@ if (std::find(scoringVolumesA.begin(), scoringVolumesA.end(), barvolume) != scor
             
             fEventAction->AddPhotonG_UsingEdep_B(b, generated_photons_B); 
             fEventAction->AddEdepB(b, edep_B);
-            //fEventAction->AccumulatedEdx_B(b, dEdxStep_B);  
+
 
 
             G4int eventID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
 
-/*outFile1 
-<< eventID << " "
-<< "B" << " "
-<< b << " "
-<< p_name << " "
-<< edep_B/MeV << " "
-<< B_pos_x << " "
-<< B_pos_y << " "
-<< B_pos_z << " "
-<< generated_photons_B
-<< "\n";*/
+
          }
          }
 } 

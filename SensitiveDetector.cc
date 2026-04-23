@@ -49,7 +49,7 @@ G4bool SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
 
 
     man->FillNtupleIColumn(0, 59, evt); 
-    man->AddNtupleRow(0); 
+
     
      G4String particleName = track->GetDefinition()->GetParticleName();  // Get the particle type
   

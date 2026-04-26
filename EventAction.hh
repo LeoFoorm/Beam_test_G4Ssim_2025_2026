@@ -169,12 +169,14 @@ void Add_Positions_Layer_A(G4double pos_xa, G4double pos_ya, G4double pos_za, G4
     pos_layer_A_x.push_back(pos_xa);
     pos_layer_A_y.push_back(pos_ya);
     pos_layer_A_z.push_back(pos_za);
+    pos_trackID_A.push_back(trackID_pos);
     particle_tracks_A.insert(trackID_pos);
     }
 }
 vector<G4double> Get_pos_x_a() const {return pos_layer_A_x;}
 vector<G4double> Get_pos_y_a() const {return pos_layer_A_y;}
 vector<G4double> Get_pos_z_a() const {return pos_layer_A_z;}
+ vector<G4int> Get_trackID_a() const {return pos_trackID_A;} 
 
 
 
@@ -186,12 +188,14 @@ void Add_Positions_Layer_B(G4double pos_xb, G4double pos_yb, G4double pos_zb, G4
     pos_layer_B_x.push_back(pos_xb);
     pos_layer_B_y.push_back(pos_yb);
     pos_layer_B_z.push_back(pos_zb);
+    pos_trackID_B.push_back(trackID_pos);
     particle_tracks_B.insert(trackID_pos);
     }
 }
 vector<G4double> Get_pos_x_b() const {return pos_layer_B_x;}
 vector<G4double> Get_pos_y_b() const {return pos_layer_B_y;}
 vector<G4double> Get_pos_z_b() const {return pos_layer_B_z;}
+ vector<G4int> Get_trackID_b() const {return pos_trackID_B;} 
 
 
 
@@ -252,6 +256,8 @@ G4double total_edep_B;
 
 
 
+vector<G4int> pos_trackID_A;
+vector<G4int> pos_trackID_B;
 
 vector<G4double> pos_layer_A_x;
 vector<G4double> pos_layer_A_y;
@@ -260,6 +266,7 @@ vector<G4double> pos_layer_A_z;
 vector<G4double> pos_layer_B_x;
 vector<G4double> pos_layer_B_y;
 vector<G4double> pos_layer_B_z;
+
 
 
 

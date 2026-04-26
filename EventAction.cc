@@ -49,18 +49,22 @@ fGenerated_photons_B.resize(10, 0.0);
     pos_layer_B_z.clear();
 
 
+    particle_tracks_A.clear();  
+    particle_tracks_B.clear();
+     pos_trackID_A.clear();
+     pos_trackID_B.clear();  
 
     particle_name_tracks_A.clear();  
     particle_name_tracks_B.clear();  
   
     
-    outFile.open("Test.dat");  // ⚠️ sin std::ios::app para evitar duplicados
+    outFile.open("Test.dat");  
 
-    // encabezado (opcional pero recomendado)
-    outFile << "EventID ";
-    for(int i=0;i<10;i++) outFile << "EdepA_" << i << " ";
-    for(int i=0;i<10;i++) outFile << "EdepB_" << i << " ";
-    outFile << "TotalEdep\n";
+    /*outFile << "Positions_A(x,y,z,trackID)\tPositions_B(x,y,z,trackID)\t";
+    outFile << "Particles_A\tParticles_B\n";*/
+
+    outFile << "EventID\tID_A\tID_B\tHIT\tPart_A\tPart_B\tE_A_MeV\tE_B_MeV\t";
+    outFile << "Pos_A(x,y,z)_cm\tPos_B(x,y,z)_cm\n";
 
 
 
@@ -131,14 +135,20 @@ void EventAction::BeginOfEventAction(const G4Event*)
 
 
 
-
+    particle_tracks_A.clear();  
+    particle_tracks_B.clear();
+    pos_trackID_A.clear();
+    pos_trackID_B.clear(); 
+     
     pos_layer_A_x.clear();
     pos_layer_A_y.clear();
     pos_layer_A_z.clear();
 
+
     pos_layer_B_x.clear();
     pos_layer_B_y.clear();
     pos_layer_B_z.clear();
+ 
 
 
 
@@ -213,40 +223,8 @@ for(size_t i = 0; i < fEdepB.size(); ++i){
 
 
 
-//-------------------------------------- dE/dx ----------------------------------------------------
 
-//---------------------------------------------------
-
-
-
-
-
-//-------------------------------- DETECTED PHOTONS ---------------------------------------------------------
-
-
-/*G4int eventID = event->GetEventID();
-
-    outFile << eventID << " ";
-
-    // Energía capa A
-    for (size_t i = 0; i < fEdepA.size(); i++){
-        outFile << fEdepA[i] << " ";
-    }
-
-    // Energía capa B
-    for (size_t i = 0; i < fEdepB.size(); i++){
-        outFile << fEdepB[i] << " ";
-    }
-
-    // Energía total
-    G4double totalE = 0;
-    for(auto e : fEdepA) totalE += e;
-    for(auto e : fEdepB) totalE += e;
-
-    outFile << totalE;
-
-    outFile << "\n";*/
-
+G4cout << "\n------------------------------------------------------------" << G4endl;
 //----------------------------------------GENERATED PHOTONS-------------------------------------------------
 G4cout << "" << G4endl;
 
@@ -376,7 +354,7 @@ if (traversed_Bars_A.empty()) {
  
 
 
-        G4cout << "--------------------------------------------------------------------------------" << G4endl;
+G4cout << "--------------------------------------------------------------------------------" << G4endl;
 
 
 
@@ -455,7 +433,100 @@ for(const auto& pos_z_B :pos_layer_B_z){
         man->FillNtupleDColumn(0, 55, pos_z_B);
 }
 
+G4cout <<"==============================================================="<< G4endl;
 G4cout << "\n" << G4endl;
+
+
+
+
+
+
+
+// ========== ESCRIBIR EN ARCHIVO .dat ==========
+
+    G4int eventID = event->GetEventID();
+
+    outFile << eventID << "\t";
+
+    //outFile << traversed_Bars_A.size() << "\t";
+    
+
+    // IDcapa A
+
+    if(traversed_Bars_A.empty()){   
+            outFile << "-1.0";
+        }else{
+        for(size_t i = 0; i < traversed_Bars_A.size(); i++){
+        outFile << traversed_Bars_A[i];
+       // if(i < traversed_Bars_A.size() - 1) outFile << ",";
+        }
+    }
+    outFile << "\t";
+    
+
+    // ID capa B
+    if(traversed_Bars_B.empty()){
+            outFile << "0";
+        }else{
+        for(size_t i = 0; i < traversed_Bars_B.size(); i++){
+        outFile << traversed_Bars_B[i];
+        }
+    }
+    outFile << "\t";
+
+
+    //Hit
+    if(Hit_particle_passed_two_layers == 1.0){
+        outFile << Hit_particle_passed_two_layers;
+    }
+    outFile << "\t";
+
+
+
+    // Nombre capa A 
+    for(size_t i = 0; i < particles_names_A.size(); i++){
+        outFile << particles_names_A[i];
+        //if(i < particle_name_tracks_A.size() - 1) outFile << ",";
+    }
+    outFile << "\t";
+    
+    // Nombre capa B
+    for(size_t i = 0; i < particles_names_B.size(); i++){
+        outFile << particles_names_B[i];
+    }
+    outFile << "\t";
+    
+
+    //Energias
+    for(size_t i = 0; i < fEdepA.size(); i++){
+        if(fEdepA[i]>0){
+            outFile << fEdepA[i] ;    
+    }}
+    outFile << "\t";
+
+
+    for(size_t i = 0; i < fEdepB.size(); i++){
+        if(fEdepB[i]>0){
+            outFile << fEdepB[i];    
+    }}
+    outFile << "\t";
+
+
+    
+    //Posiciones en capa A: (x,y,z) 
+    for(size_t i = 0; i < pos_layer_A_x.size(); i++){
+        outFile << "(" << pos_layer_A_x[i] << "," << pos_layer_A_y[i] << "," 
+                   << pos_layer_A_z[i] << ")";
+       // if(i < pos_layer_A_x.size() - 1) outFile << ";";  
+    }
+    outFile << "\t";
+    
+    // Posiciones en capa B
+    for(size_t i = 0; i < pos_layer_B_x.size(); i++){
+        outFile << "(" << pos_layer_B_x[i] << "," << pos_layer_B_y[i] << "," 
+                   << pos_layer_B_z[i] <<  ")";
+    }
+    outFile << "\n";
 
 
 man->AddNtupleRow(0);
@@ -463,4 +534,6 @@ man->AddNtupleRow(0);
 }
 
 
+
+ 
 

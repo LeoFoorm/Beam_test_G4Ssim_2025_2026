@@ -40,8 +40,8 @@ G4TouchableHandle touchedbar = step->GetPreStepPoint()->GetTouchableHandle();
 G4StepPoint *PreStep = step->GetPreStepPoint();
   
  
-//if(particle->GetParticleName()== "mu+" ||  particle->GetParticleName() == "pi+" )
-if(particle->GetParticleName() !="opticalphoton" ){
+if(particle->GetParticleName()== "mu+" ||  particle->GetParticleName() == "pi+" ){
+//if(particle->GetParticleName() !="opticalphoton" ){
 
    G4double generated_photons_A;
    G4double generated_photons_B ;

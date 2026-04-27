@@ -1,6 +1,8 @@
 //   EVENT ACTION SOURCE
 
 #include "EventAction.hh" 
+#include "G4Threading.hh"
+#include <sstream>
 #include <iostream>
 using namespace std;
 
@@ -57,8 +59,14 @@ fGenerated_photons_B.resize(10, 0.0);
     particle_name_tracks_A.clear();  
     particle_name_tracks_B.clear();  
   
+    G4int threadID = G4Threading::G4GetThreadId();
+
+    std::stringstream filename;
+    filename << "Test_thread_" << threadID << ".dat";
+
+    outFile.open(filename.str());
     
-    outFile.open("Test.dat");  
+    //outFile.open("Test.dat");  
 
     /*outFile << "Positions_A(x,y,z,trackID)\tPositions_B(x,y,z,trackID)\t";
     outFile << "Particles_A\tParticles_B\n";*/
@@ -436,8 +444,10 @@ for(const auto& pos_z_B :pos_layer_B_z){
 G4cout <<"==============================================================="<< G4endl;
 G4cout << "\n" << G4endl;
 
-
-
+G4cout << "Thread: " << G4Threading::G4GetThreadId()
+       << " | Event: " << event->GetEventID() << G4endl;
+G4cout <<"==============================================================="<< G4endl;
+G4cout << "\n" << G4endl;
 
 
 

@@ -29,8 +29,8 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 G4double momentumParticle = 2.0;
 //columna 12 (8)
-posX = 180.957*cm;
-posZ = -180.857*cm;
+posX = 18.957*cm;
+posZ = -18.857*cm;
 
 //posX = 18.957*cm;
 //posZ = -18.857*cm;

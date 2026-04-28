@@ -1,0 +1,112 @@
+Energy scan
+
+/gun/position x y z cm
+
+Bar 12 (Yael)
+Barra 8 (yo) Posición en Y siempre la misma
+
+
+(8,11)
+posX = 18.957*cm
+posZ = -18.857*cm
+
+(8,14)
+posX = 18.957*cm
+Zpos = -2.651*cm
+
+(8,16)
+posX = 18.957*cm
+Zpos = 8.153*cm
+
+(8,18)
+posX = 18.957*cm
+Zpos = 18.957*cm
+
+
+-----------------------------------------------
+Bar 14 (Yael)
+Bar 6 (yo)
+
+
+(6,11)
+Xpos = 8.153*cm
+Zpos = -18.857*cm
+
+(6,14)
+Xpos = 8.153*cm
+Zpos = -2.651*cm
+
+(6,16)
+Xpos = 8.153*cm
+Zpos = 8.153*cm
+
+(6,18)
+Xpos = 8.153*cm
+Zpos = 18.957*cm
+
+
+
+----------------------------------------------
+Bar 15 (Yael)
+Bar 5 (Yo)
+
+
+(5,11)
+Xpos = 2.751*cm
+Zpos = -18.857*cm
+
+(5,14)
+Xpos = 2.751*cm
+Zpos = -2.651*cm
+
+(5,16)
+Xpos = 2.751*cm
+Zpos = 8.153*cm
+
+(5,18)
+Xpos = 2.751*cm
+Zpos = 18.957*cm
+
+
+----------------------------------------------
+Bar 18 (Yael)
+Bar 2 (Yo)
+
+(2,11)
+Xpos = -13.455*cm
+Zpos = -18.857*cm
+
+(2,14)
+Xpos = -13.455*cm
+Zpos = -2.651*cm
+
+(2,16)
+Xpos = -13.455*cm
+Zpos = 8.153*cm
+
+(2,18)
+Xpos = -13.455*cm
+Zpos = 18.957*cm 
+
+
+--------------------------------------------
+Bar 20 (Yael)
+Bar 0 (yo)
+
+(0,11)
+Xpos = -24.259*cm
+Zpos = -18.857*cm
+
+(0,14)
+Xpos = -24.259*cm
+Zpos = -2.651*cm
+
+
+(0,16)
+Xpos = -24.259*cm
+Zpos = 8.153*cm
+
+(0,18)
+Xpos = -24.259*cm
+Zpos = 18.957*cm
+
